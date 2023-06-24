@@ -4,10 +4,10 @@
 // import img3 from '@/assets/swipe/3.png';
 // import img4 from '@/assets/swipe/4.png';
 
-import img1 from '@/assets/swipe/img/1.jpg';
-import img2 from '@/assets/swipe/img/2.jpg';
-import img3 from '@/assets/swipe/img/3.jpg';
-import img4 from '@/assets/swipe/img/4.jpg';
+import img1 from '../../assets/swipe/img/1.jpg';
+import img2 from '../../assets/swipe/img/2.jpg';
+import img3 from '../../assets/swipe/img/3.jpg';
+import img4 from '../../assets/swipe/img/4.jpg';
 
 import { ref, onMounted, watch } from "vue";
 const currentIndex = ref(0);
@@ -103,8 +103,8 @@ onMounted(()=> {
   }
 
   .swipe-item-mask {
-    mask-image: url('@/assets/swipe/mask.png');
-    -webkit-mask-image: url(@/assets/swipe/mask4.png);
+    mask-image: url('../../assets/swipe/mask.png');
+    -webkit-mask-image: url(../../assets/swipe/mask4.png);
   }
   
   .fly-indicator{

@@ -1,8 +1,5 @@
-# What is My Lib?
+# 什么是fly-ui
 
-This library is a starter to create your own Vue 3 component library in TypeScript.
+这是一个基于Vue3的组件库，里面基本是一些业务类组件或长尾类组件。
+为弥补市面上基础组件库的不足而存在。
 
-There are two example components included for you to get started with creating your own components:
-
-- [ComponentA](/components/component-a) is a simple Hello World component with icon from bundled font file.
-- [ComponentB](/components/component-b) is a counter component using button from [PrimeVue](https://www.primefaces.org/primevue/), icons from [PrimeIcons](https://www.primefaces.org/showcase/icons.xhtml) and styling from [PrimeFlex](https://www.primefaces.org/primeflex/).

@@ -4,6 +4,11 @@ import vue from '@vitejs/plugin-vue';
 
 module.exports = defineConfig({
   plugins: [vue()], // to process SFC
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src/')
+    }
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),

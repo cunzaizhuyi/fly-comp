@@ -1,22 +1,23 @@
 const path = require('path')
 
 module.exports = {
-  title: 'My Lib',
-  description: 'Just playing around.',
+  title: 'fly-ui',
+  description: '长尾组件库',
   themeConfig: {
-    repo: 'https://github.com/wuruoyun/vue-component-lib-starter',
+    repo: 'https://github.com/cunzaizhuyi/fly-ui',
     sidebar: [
       {
         text: 'Introduction',
         children: [
-          { text: 'What is My Lib?', link: '/' },
-          { text: 'Getting Started', link: '/guide/' },
+          { text: '介绍', link: '/' },
+          { text: '开始', link: '/guide/' },
         ],
       }, {
         text: 'Components',
         children: [
-          { text: 'Component A', link: '/components/component-a' },
-          { text: 'Component B', link: '/components/component-b' },
+          // { text: 'Component A', link: '/components/component-a' },
+          // { text: 'Component B', link: '/components/component-b' },
+          { text: 'MaskSwipe', link: '/components/MaskSwipe' },
         ],
       }
     ],
@@ -24,7 +25,7 @@ module.exports = {
   vite: {
     resolve: {
       alias: {
-        'my-lib': path.resolve(__dirname, '../../src'),
+        'fly-ui': path.resolve(__dirname, '../../src'),
       },
       dedupe: ['vue', /primevue\/.+/], // avoid error when using dependencies that also use Vue
     }

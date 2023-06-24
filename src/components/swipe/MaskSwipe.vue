@@ -32,8 +32,8 @@ watch(currentIndex, () => {
 const execAnimation = () => {
   transition.value = 'all 1s';
   maskPosition.value = 0;
-  maskPosition.value = totalTranslateX / 2;
-  maskPosition.value = totalTranslateX;
+  // maskPosition.value = totalTranslateX / 2;
+  maskPosition.value = 1000;
   oldCurrentIndex.value = (currentIndex.value + 1) % (imgList.value.length - 1);
 
 
@@ -103,6 +103,10 @@ onMounted(()=> {
   }
 
   .swipe-item-mask {
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: cover;
+    -webkit-mask-size: cover;
     mask-image: url('../../assets/swipe/mask.png');
     -webkit-mask-image: url(../../assets/swipe/mask4.png);
   }

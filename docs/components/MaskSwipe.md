@@ -3,7 +3,7 @@ import Basic from './demo/MaskSwipe/Basic.vue'
 </script>
 # MaskSwipe
 
-新式轮播组件，遮罩组件
+新式轮播组件，遮罩轮播组件
 
 ## Usage
 

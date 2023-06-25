@@ -12,9 +12,9 @@ module.exports = defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'fly-ui',
+      name: 'fly-comp',
       formats: ['es'], // adding 'umd' requires globals set to every external module
-      fileName: (format) => `fly-ui.${format}.js`,
+      fileName: (format) => `fly-comp.${format}.js`,
     },
     rollupOptions: {
       // external modules won't be bundled into your library

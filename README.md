@@ -10,5 +10,5 @@
 ## install
 
 ```html
-npm i fly-ui
+npm i fly-comp
 ```

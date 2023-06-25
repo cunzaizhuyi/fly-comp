@@ -1,10 +1,9 @@
-# Getting Started
+# 开始
 
-You may add the usage of the library here.
+教你怎么使用组件
 
-> If you remove Component B and the [PrimeFaces](https://www.primefaces.org/) (PrimeVue, PrimeIcons and PrimeFlex) dependencies from your library, the setup related to PrimeFaces won't be needed from the guide below.
 
-## Setup
+## 安装
 
 This setup assumes your client app is created with Vite and vue-ts template, and you use 'npm link' to link to `my-lib` locally.
 
@@ -12,9 +11,6 @@ In your `package.json`, you shall have the dependencies compatible with the foll
 
 ```json
 "dependencies": {
-  "primeflex": "^3.1.2",
-  "primeicons": "^5.0.0",
-  "primevue": "^3.11.1",
   "vue": "^3.2.25"
 }
 ```
@@ -29,21 +25,16 @@ export default defineConfig({
 });
 ```
 
-In your `main.ts`, you shall import the libraries and CSS:
+在你的`main.ts`文件，引入CSS:
 
 ```ts
-import 'primevue/resources/themes/saga-blue/theme.css';
-import 'primevue/resources/primevue.min.css';
-import 'primeicons/primeicons.css';
-import 'primeflex/primeflex.css';
-
-import 'my-lib/dist/style.css';
+import 'fly-comp/dist/style.css';
 ```
 
-Import components from this library in your own component:
+导入组件
 
 ```html
 <script setup lang="ts">
-  import { ComponentA, ComponentB } from 'my-lib';
+  import { ComponentA, ComponentB } from 'fly-comp';
 </script>
 ```

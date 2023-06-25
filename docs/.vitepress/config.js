@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  title: 'fly-ui',
+  title: 'fly-comp',
   description: '长尾组件库',
   themeConfig: {
     repo: 'https://github.com/cunzaizhuyi/fly-ui',
@@ -25,7 +25,7 @@ module.exports = {
   vite: {
     resolve: {
       alias: {
-        'fly-ui': path.resolve(__dirname, '../../src'),
+        'fly-comp': path.resolve(__dirname, '../../src'),
       },
       dedupe: ['vue', /primevue\/.+/], // avoid error when using dependencies that also use Vue
     }

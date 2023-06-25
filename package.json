@@ -30,6 +30,10 @@
     "vue": "^3.2.25",
     "vue-tsc": "^0.29.8"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cunzaizhuyi/fly-comp.git"
+  },
   "files": [
     "src",
     "dist"

@@ -4,27 +4,36 @@
 // import img3 from '@/assets/swipe/3.png';
 // import img4 from '@/assets/swipe/4.png';
 
-import img1 from '../../assets/swipe/img/1.jpg';
-import img2 from '../../assets/swipe/img/2.jpg';
-import img3 from '../../assets/swipe/img/3.jpg';
-import img4 from '../../assets/swipe/img/4.jpg';
+// import img1 from '../../assets/swipe/img/1.jpg';
+// import img2 from '../../assets/swipe/img/2.jpg';
+// import img3 from '../../assets/swipe/img/3.jpg';
+// import img4 from '../../assets/swipe/img/4.jpg';
 
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, defineProps } from "vue";
+
+const props = defineProps(['imgList', 'duration', 'transitionDuration', ''])
+
 const currentIndex = ref(0);
 const oldCurrentIndex = ref(0);
-const imgList = ref([img1, img2, img3, img4, img1]);
-const initZindex = [5, 4, 3, 2, 1];
-const zIndexArr = ref([...initZindex]);
+const imgList = ref([...props.imgList, props.imgList[0]]);
+const getInitZindex = () => {
+  const arr = [1];
+  for (let i = imgList.value.length - 1; i >= 1; i--) {
+    arr.unshift(arr[0] + 1);
+  }
+  return arr;
+}
+const zIndexArr = ref([...getInitZindex()]);
 const maskPosition = ref(0);
 const transition = ref('all 1s');
 
-const transitionDuration = 1000;
-const duration = 3000;
+const transitionDuration = props.transitionDuration || 1000;
+const duration = props.duration || 3000;
 const totalTranslateX = 475;
 
 watch(currentIndex, () => {
   if (currentIndex.value === 0) {
-    zIndexArr.value = [...initZindex];
+    zIndexArr.value = [...getInitZindex()];
   }
   maskPosition.value = 0;
   transition.value = 'none';

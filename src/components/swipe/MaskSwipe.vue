@@ -9,9 +9,12 @@
 // import img3 from '../../assets/swipe/img/3.jpg';
 // import img4 from '../../assets/swipe/img/4.jpg';
 
-import { ref, onMounted, watch, defineProps } from "vue";
+import { ref, onMounted, watch } from "vue";
 
-const props = defineProps(['imgList', 'duration', 'transitionDuration', ''])
+const props = defineProps(['imgList',
+  'duration', 'transitionDuration',
+  'maskPositionFrom', 'maskPositionTo',
+  'maskImageUrl']);
 
 const currentIndex = ref(0);
 const oldCurrentIndex = ref(0);
@@ -24,7 +27,7 @@ const getInitZindex = () => {
   return arr;
 }
 const zIndexArr = ref([...getInitZindex()]);
-const maskPosition = ref(0);
+const maskPosition = ref(props.maskPositionFrom || 'left');
 const transition = ref('all 1s');
 
 const transitionDuration = props.transitionDuration || 1000;
@@ -35,14 +38,13 @@ watch(currentIndex, () => {
   if (currentIndex.value === 0) {
     zIndexArr.value = [...getInitZindex()];
   }
-  maskPosition.value = 0;
+  maskPosition.value = props.maskPositionFrom || 'left';
   transition.value = 'none';
 })
 const execAnimation = () => {
   transition.value = 'all 1s';
-  maskPosition.value = 0;
-  // maskPosition.value = totalTranslateX / 2;
-  maskPosition.value = 1000;
+  maskPosition.value = props.maskPositionFrom || 'left';
+  maskPosition.value = props.maskPositionTo || 'right';
   oldCurrentIndex.value = (currentIndex.value + 1) % (imgList.value.length - 1);
 
 
@@ -55,14 +57,12 @@ const execAnimation = () => {
 }
 
 onMounted(()=> {
-  setTimeout(() => {
-
+  const firstDelay = duration - transitionDuration;
+  function animate() {
     execAnimation();
-    setInterval(() => {
-      execAnimation();
-    }, duration);
-
-  }, duration - transitionDuration)
+    setTimeout(animate, duration);
+  }
+  setTimeout(animate, firstDelay);
 })
 
 </script>
@@ -75,7 +75,10 @@ onMounted(()=> {
          :key="index"
          :style="{ zIndex: zIndexArr[index],
          'transition': index === currentIndex ? transition : 'none',
-         '-webkit-mask-position':  index === currentIndex ? '-' + maskPosition + 'px': '' }">
+         'mask-image': index === currentIndex ? `url(${maskImageUrl})` : '',
+         '-webkit-mask-image': index === currentIndex ? `url(${maskImageUrl})`: '',
+         'mask-position':  index === currentIndex ? maskPosition: '',
+         '-webkit-mask-position':  index === currentIndex ? maskPosition: '' }">
       <img :src="url" alt="">
     </div>
     <div class="fly-indicator">
@@ -116,8 +119,8 @@ onMounted(()=> {
     -webkit-mask-repeat: no-repeat;
     mask-size: cover;
     -webkit-mask-size: cover;
-    mask-image: url('../../assets/swipe/mask.png');
-    -webkit-mask-image: url(../../assets/swipe/mask4.png);
+    //mask-image: url('../../assets/swipe/mask4.png');
+    //-webkit-mask-image: url(../../assets/swipe/mask4.png);
   }
   
   .fly-indicator{

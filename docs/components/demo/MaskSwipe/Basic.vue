@@ -15,6 +15,7 @@ import maskImage from '../../../../src/assets/swipe/mask.png';
         maskPositionFrom="left"
         maskPositionTo="right"
         :mask-image-url="maskImage"
+        indicator-position="right"
     />
   </div>
 </template>

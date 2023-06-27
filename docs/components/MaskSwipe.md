@@ -31,9 +31,15 @@ You may show props, slots, events, methods, etc. using Markdown.
 
 ### Properties
 
-| Name        | Type     | Default  | Description     |
-| ----------- | -------- | -------- | --------------- |
-|             |          |          |                 |
+| Name                | Type     | Default  | Description                     |
+|---------------------|----------|----------|---------------------------------|
+| img-list            | string[] | []       | 待轮播图片数组                         |
+| duration            | number   | 3        | 轮播间隔，单位秒                        |
+| transition-duration | number       | 1        | 过渡动效持续时间，单位秒                    |
+| mask-image-url      | string   | ''       | 遮罩图片URL                         |
+| mask-position-from  | string   | `left`   | 遮罩图片mask-position属性的值           |
+| mask-position-from  | string   | `right`  | 动效过渡后，遮罩图片mask-position属性的值     |
+| indicatorPosition                    | string   | `center` | 指示器位置，`left`, `right`, `center` |  
 
 ### Events
 

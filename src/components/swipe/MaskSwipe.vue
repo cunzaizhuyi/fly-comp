@@ -10,11 +10,32 @@
 // import img4 from '../../assets/swipe/img/4.jpg';
 
 import { ref, onMounted, watch } from "vue";
+import type { PropType } from "vue";
 
-const props = defineProps(['imgList',
-  'duration', 'transitionDuration',
-  'maskPositionFrom', 'maskPositionTo',
-  'maskImageUrl']);
+const props = defineProps({
+  imgList: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+    required: true
+  },
+  duration: {
+    type: Number,
+    default: 3,
+  },
+  transitionDuration: {
+    type: Number,
+    default: 1,
+  },
+  maskPositionFrom: {
+    type: String,
+    default: 'left',
+  },
+  maskPositionTo: {
+    type: String,
+    default: 'right',
+  },
+  maskImageUrl: String,
+});
 
 const currentIndex = ref(0);
 const oldCurrentIndex = ref(0);
@@ -27,24 +48,23 @@ const getInitZindex = () => {
   return arr;
 }
 const zIndexArr = ref([...getInitZindex()]);
-const maskPosition = ref(props.maskPositionFrom || 'left');
-const transition = ref('all 1s');
+const maskPosition = ref(props.maskPositionFrom);
+const transition = ref(`all ${props.transitionDuration}s`);
 
-const transitionDuration = props.transitionDuration || 1000;
-const duration = props.duration || 3000;
-const totalTranslateX = 475;
+const transitionDuration = props.transitionDuration * 1000;
+const duration = props.duration * 1000;
 
 watch(currentIndex, () => {
   if (currentIndex.value === 0) {
     zIndexArr.value = [...getInitZindex()];
   }
-  maskPosition.value = props.maskPositionFrom || 'left';
+  maskPosition.value = props.maskPositionFrom;
   transition.value = 'none';
 })
 const execAnimation = () => {
-  transition.value = 'all 1s';
-  maskPosition.value = props.maskPositionFrom || 'left';
-  maskPosition.value = props.maskPositionTo || 'right';
+  transition.value = `all ${props.transitionDuration}s`;
+  maskPosition.value = props.maskPositionFrom;
+  maskPosition.value = props.maskPositionTo;
   oldCurrentIndex.value = (currentIndex.value + 1) % (imgList.value.length - 1);
 
 

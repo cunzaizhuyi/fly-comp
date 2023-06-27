@@ -9,8 +9,8 @@ import maskImage from '../../../../src/assets/swipe/mask.png';
 <template>
   <div>
     <MaskSwipe
-        :duration="3000"
-        :transition-duration="1000"
+        :duration="3"
+        :transition-duration="1"
         :img-list="[img1, img2, img3, img4]"
         maskPositionFrom="left"
         maskPositionTo="right"

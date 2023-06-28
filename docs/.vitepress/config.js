@@ -18,6 +18,7 @@ module.exports = {
           // { text: 'Component A', link: '/components/component-a' },
           // { text: 'Component B', link: '/components/component-b' },
           { text: 'MaskSwipe', link: '/components/MaskSwipe' },
+          { text: 'FlyClock', link: '/components/FlyClock' },
         ],
       }
     ],

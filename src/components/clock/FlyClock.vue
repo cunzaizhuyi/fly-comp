@@ -6,15 +6,15 @@
   const mins = -60 * time.getMinutes();
   const sec = -time.getSeconds();
   onMounted(() => {
-    const app = document.getElementById('cui-clock');
-    app.style.setProperty('--delay-second', `${sec}s`);
-    app.style.setProperty('--delay-minute', `${mins + sec}s`);
-    app.style.setProperty('--delay-hour', `${(hour + mins + sec)}s`);
+    const app = document.getElementById('fly-clock');
+    app?.style?.setProperty('--delay-second', `${sec}s`);
+    app?.style?.setProperty('--delay-minute', `${mins + sec}s`);
+    app?.style?.setProperty('--delay-hour', `${(hour + mins + sec)}s`);
   });
 </script>
 
 <template>
-    <div class="fly-clock" id="cui-clock">
+    <div class="fly-clock" id="fly-clock">
       <div class="fly-clock-face">
         <span class="label">12</span>
         <span class="label">1</span>

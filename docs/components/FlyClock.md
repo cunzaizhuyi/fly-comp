@@ -1,7 +1,7 @@
 <script setup>
 import Basic from './demo/FlyClock/Basic.vue'
 </script>
-# MaskSwipe
+# FlyClock
 
 模拟时钟组件
 

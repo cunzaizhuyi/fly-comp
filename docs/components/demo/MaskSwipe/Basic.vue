@@ -14,7 +14,7 @@ import maskImage from '../../../../src/assets/swipe/mask.png';
         :img-list="[img1, img2, img3, img4]"
         maskPositionFrom="left"
         maskPositionTo="right"
-        :mask-image-url="maskImage"
+        :mask-image="`url(${maskImage})`"
         indicator-position="right"
     />
   </div>

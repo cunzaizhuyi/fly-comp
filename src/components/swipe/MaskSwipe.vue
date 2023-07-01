@@ -1,9 +1,10 @@
 <script setup lang="ts">
 
-import { ref, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import type { PropType } from "vue";
 
 type IndicatorPosition = 'left' | 'center' | 'right';
+type EffectType = 'radial' | 'conic';
 
 const props = defineProps({
   imgList: {
@@ -27,7 +28,12 @@ const props = defineProps({
     type: String,
     default: 'right',
   },
-  maskImageUrl: String,
+  maskImage: String,
+  maskSize: String,
+  effectType: {
+    type: String as PropType<EffectType>,
+    default: '',
+  },
   indicatorPosition: {
     type: String as PropType<IndicatorPosition>,
     default: 'center',
@@ -47,6 +53,8 @@ const getInitZindex = () => {
 const zIndexArr = ref([...getInitZindex()]);
 const maskPosition = ref(props.maskPositionFrom);
 const transition = ref(`all ${props.transitionDuration}s`);
+const animation = ref('');
+
 
 const transitionDuration = props.transitionDuration * 1000;
 const duration = props.duration * 1000;
@@ -56,21 +64,26 @@ watch(currentIndex, () => {
     zIndexArr.value = [...getInitZindex()];
   }
   maskPosition.value = props.maskPositionFrom;
+  animation.value = '';
   transition.value = 'none';
 })
 const execAnimation = () => {
   transition.value = `all ${props.transitionDuration}s`;
   maskPosition.value = props.maskPositionFrom;
   maskPosition.value = props.maskPositionTo;
+  if (props.effectType === 'radial') {
+    animation.value = `radial-ani ${props.transitionDuration}s linear forwards`;
+  } else if (props.effectType === 'conic') {
+    animation.value = `conic-ani ${props.transitionDuration}s linear forwards`;
+  }
   oldCurrentIndex.value = (currentIndex.value + 1) % (imgList.value.length - 1);
-
 
   setTimeout(() => {
 
     zIndexArr.value[currentIndex.value] = 1;
     currentIndex.value = (currentIndex.value + 1) % (imgList.value.length - 1);
 
-  }, 1000)
+  }, transitionDuration)
 }
 
 onMounted(()=> {
@@ -82,16 +95,38 @@ onMounted(()=> {
   setTimeout(animate, firstDelay);
 })
 
+const maskImage = computed(() => {
+  if (props.effectType === 'radial') {
+    return `radial-gradient(circle,
+    transparent calc(var(--radial-radius) - 5%),
+    #fff calc(var(--radial-radius) + 5%))`
+  }
+  if (props.effectType === 'conic') {
+    return `conic-gradient(
+                transparent 0deg,
+                transparent calc(var(--angle) - 10deg),
+                #fff calc(var(--angle) + 10deg),
+                #fff 360deg
+              )
+          `;
+  }
+  return props.maskImage;
+});
 const getCurrentStyle = (index: number) => {
   if (index !== currentIndex.value) return {};
   return {
     transition: transition.value,
 
-    'mask-image': `url(${props.maskImageUrl})`,
-    '-webkit-mask-image': `url(${props.maskImageUrl})`,
+    'mask-image': maskImage.value,
+    '-webkit-mask-image': maskImage.value,
 
     'mask-position': maskPosition.value,
     '-webkit-mask-position': maskPosition.value,
+
+    'mask-size': props.maskSize,
+    '-webkit-mask-size': props.maskSize,
+
+    animation: animation.value,
   };
 };
 </script>
@@ -116,7 +151,28 @@ const getCurrentStyle = (index: number) => {
   </div>
 </template>
 
+<style>
+@property --radial-radius {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: -5%;
+}
+
+@keyframes radial-ani {
+  to { --radial-radius: 105%; }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: -10deg;
+}
+@keyframes conic-ani {
+  to { --angle: 370deg; }
+}
+</style>
 <style lang="less" scoped>
+
 .fly-swipe-container {
   position: relative;
   overflow: hidden;

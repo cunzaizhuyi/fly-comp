@@ -82,6 +82,18 @@ onMounted(()=> {
   setTimeout(animate, firstDelay);
 })
 
+const getCurrentStyle = (index: number) => {
+  if (index !== currentIndex.value) return {};
+  return {
+    transition: transition.value,
+
+    'mask-image': `url(${props.maskImageUrl})`,
+    '-webkit-mask-image': `url(${props.maskImageUrl})`,
+
+    'mask-position': maskPosition.value,
+    '-webkit-mask-position': maskPosition.value,
+  };
+};
 </script>
 
 <template>
@@ -91,12 +103,7 @@ onMounted(()=> {
            :class="{'swipe-item-mask': index === currentIndex}"
            v-for="(url, index) in imgList"
            :key="index"
-           :style="{ zIndex: zIndexArr[index],
-         'transition': index === currentIndex ? transition : 'none',
-         'mask-image': index === currentIndex ? `url(${maskImageUrl})` : '',
-         '-webkit-mask-image': index === currentIndex ? `url(${maskImageUrl})`: '',
-         'mask-position':  index === currentIndex ? maskPosition: '',
-         '-webkit-mask-position':  index === currentIndex ? maskPosition: '' }">
+           :style="{ zIndex: zIndexArr[index], ...getCurrentStyle(index)}">
         <img :src="url" alt="">
       </div>
     </div>

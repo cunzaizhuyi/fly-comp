@@ -6,7 +6,7 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
-    "release": "npm run build && bumpp && npm publish"
+    "release": "npm run build && bumpp --commit --push && npm publish"
   },
   "peerDependencies": {
     "primeflex": "^3.1.2",

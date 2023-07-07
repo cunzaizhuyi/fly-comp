@@ -12,3 +12,7 @@
 ```html
 npm i fly-comp
 ```
+
+## 相关项目
+
+React版本：https://github.com/LonelyFellas/fly-comp-react
